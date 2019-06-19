@@ -5,7 +5,13 @@ import {
   Alert, AsyncStorage, BackHandler, FlatList, Picker, Platform, ScrollView,
   StyleSheet, Text, View
 } from "react-native";
-import { StackNavigator } from "react-navigation";
+//import { StackNavigator } from "react-navigation";
+import {
+    createDrawerNavigator,
+    createStackNavigator,
+    createBottomTabNavigator,
+    createAppContainer,
+} from 'react-navigation';
 import { Root, Toast } from "native-base";
 import { Constants } from "expo";
 
@@ -343,12 +349,15 @@ class AddScreen extends React.Component {
 } /* End AddScreen. */
 
 
+
+
+
 /**
  * #############################################################################
  * Define the screen itself.
  * #############################################################################
  */
-const PeopleScreen = StackNavigator(
+const PeopleScreen = createStackNavigator(
 
   /* ----------  Routes. ----------  */
   {
@@ -364,6 +373,7 @@ const PeopleScreen = StackNavigator(
 
 ); /* End StackNavigator definition. */
 
-
+const App = createAppContainer(PeopleScreen);
+export default App;
 // Export the component.
-exports.PeopleScreen = PeopleScreen;
+//exports.PeopleScreen = PeopleScreen;

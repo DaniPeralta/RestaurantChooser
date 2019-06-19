@@ -4,7 +4,14 @@ import CustomTextInput from "../components/CustomTextInput";
 import { Alert, AsyncStorage, BackHandler, FlatList, Picker, Platform, ScrollView,
   StyleSheet, Text, View
 } from "react-native";
-import { StackNavigator } from "react-navigation";
+/*import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { StackNavigator } from "react-navigation";*/
+import {
+    createDrawerNavigator,
+    createStackNavigator,
+    createBottomTabNavigator,
+    createAppContainer,
+} from 'react-navigation';
 import { Root, Toast } from "native-base";
 import { Constants } from "expo";
 
@@ -71,7 +78,7 @@ import { Constants } from "expo";
     			},
     			android : { }
   			})
-		}
+		},
 		addScreenButtonsContainer : { 
 			flexDirection : "row", 
 			justifyContent : "center" 
@@ -108,7 +115,7 @@ class ListScreen extends React.Component {
 						   	   				} else {
 						   	   					inRestaurants = JSON.parse(inRestaurants);
 						   	   				}
-						   	   				for (let i=0, i < inRestaurants.length; i++){
+						   	   				for (let i = 0; i < inRestaurants.length; i++) {
 						   	   					const restaurant = inRestaurants[i];
 						   	   					if (restaurant.key === item.key){
 						   	   						inRestaurants.splice(i,1);
@@ -151,7 +158,7 @@ class ListScreen extends React.Component {
 				if(inRestaurants === null){
 					inRestaurants = [];
 				} else {
-					inRestaurants = JSON.pase(inRestaurants);
+					inRestaurants = JSON.parse(inRestaurants);
 				}
 				this.setState({ listaData : inRestaurants });
 			}.bind(this)
@@ -160,18 +167,22 @@ class ListScreen extends React.Component {
 }
 
 class AddScreen extends React.Component {
-	super(inProps);
-	this.state = {
-		name: " ";
-		cuisine: " ";
-		price: " ";
-		rating:" ";
-		phone: " ";
-		address: " ";
-		webSite: " ";
-		delivery: " ";
-		key: `r_${new Date().getTime()}`
-	};
+
+	constructor(inProps) {
+		super(inProps);
+		
+		this.state = {
+			name: " ",
+			cuisine: " ",
+			price: " ",
+			rating:" ",
+			phone: " ",
+			address: " ",
+			webSite: " ",
+			delivery: " ",
+			key: `r_${new Date().getTime()}`
+		};
+	}
 
 	render() {
 		return ( 
@@ -346,19 +357,16 @@ class AddScreen extends React.Component {
 	}
 }
 
-
-const RestaurantsScreen = StackNavigator(
-	/* ---------- Routes ----------- */
+const RestaurantsScreen = createStackNavigator(
 	{ 
 		ListScreen : { screen : ListScreen }, 
 		AddScreen : { screen : AddScreen } 
 	},
-	
-	/* ----------  Options. ----------  */
 	{ 
-		headerMode : "none", 
+		//headerMode : "none", 
 		initialRouteName : "ListScreen" 
 	}
 );
-
-exports.RestaurantsScreen = RestaurantsScreen;
+const App = createAppContainer(RestaurantsScreen);
+export default App;
+//exports.RestaurantsScreen = RestaurantsScreen;

@@ -1,8 +1,14 @@
 import React from "react";
 import CustomButton from "../components/CustomButton";
 import { Alert, AsyncStorage, BackHandler, Button, FlatList, Image, Modal, Picker,
-  ssPlatform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+  Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { StackNavigator } from "react-navigation";
+import {
+    createDrawerNavigator,
+    createStackNavigator,
+    createBottomTabNavigator,
+    createAppContainer,
+} from 'react-navigation';
 import { CheckBox } from "native-base";
 import { Constants } from "expo";
 
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
 		flex : 1, 
 		alignItems : "center", 
 		justifyContent : "center" 
-	}
+	},
 	preFiltersHeadline : { 
 		fontSize : 30, 
 		marginTop : 20, 
@@ -131,8 +137,35 @@ const styles = StyleSheet.create({
   		borderBottomWidth : 2, 
   		alignItems : "center" 
   	},
-  	choiceScreenListItemName : { flex : 1 }
-
+  	choiceScreenListItemName : { flex : 1 },
+  	postChoiceScreenContainer : { 
+  		flex : 1, 
+  		justifyContent : "center", 
+  		alignItems : "center",
+  		alignContent : "center" 
+  	},
+  	postChoiceHeadline : { 
+  		fontSize : 32, 
+  		paddingBottom : 80 
+  	},
+  	postChoiceDetailsContainer : { 
+  		borderWidth : 2, 
+  		borderColor : "#000000", 
+  		padding : 10,
+  		width : "96%" 
+  	},
+  	postChoiceDetailsRowContainer : { 
+  		flexDirection : "row", 
+  		justifyContent : "flex-start",
+  		alignItems : "flex-start", 
+  		alignContent : "flex-start" 
+  	},
+  	postChoiceDetailsLabel : { 
+  		width : 70, 
+  		fontWeight : "bold", 
+  		color : "#ff0000" 
+  	},
+  	postChoiceDetailsValue : { width : 300 }
 
 });
 
@@ -822,3 +855,22 @@ class PostChoiceScreen extends React.Component {
 
 
 } /* End PostChoiceScreen. */
+
+
+
+
+const DecisionScreen = createStackNavigator(
+  { 
+  	DecisionTimeScreen : { screen : DecisionTimeScreen },
+    WhosGoingScreen : { screen : WhosGoingScreen },
+    PreFiltersScreen : { screen : PreFiltersScreen },
+    ChoiceScreen : { screen : ChoiceScreen },
+    PostChoiceScreen : { screen : PostChoiceScreen }
+  },
+  { headerMode : "none" }
+);
+
+const App = createAppContainer(DecisionScreen);
+export default App;
+//exports.DecisionScreen = DecisionScreen;
+

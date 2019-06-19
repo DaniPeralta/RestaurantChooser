@@ -1,17 +1,25 @@
 import React from "react";
 import { Constants } from "expo";
 import { Image, Platform } from "react-native";
-import { TabNavigator } from "react-navigation";
-import { PeopleScreen } from "./screens/PeopleScreen";
-import { DecisionScreen } from "./screens/DecisionScreen";
-import { RestaurantsScreen } from "./screens/RestaurantsScreen";
+
+import {
+    createDrawerNavigator,
+    createStackNavigator,
+    createBottomTabNavigator,
+    createAppContainer,
+    TabNavigator
+} from 'react-navigation';
+
+import  PeopleScreen from "./screens/PeopleScreen";
+import  DecisionScreen from "./screens/DecisionScreen";
+import  RestaurantsScreen  from "./screens/RestaurantsScreen";
 
 console.log("------------------------------------------------------------");
 console.log(`RestaurantChooser starting on ${Platform.OS}`);
 
 const platformOS = Platform.OS.toLowerCase();
 
-const tabs = TabNavigator({
+const tabs = createBottomTabNavigator({
     PeopleScreen : { screen : PeopleScreen,
       navigationOptions : { tabBarLabel : "People",
         tabBarIcon : ( { tintColor } ) => (
@@ -47,4 +55,8 @@ const tabs = TabNavigator({
   }
 );
 
-export default tabs;
+//export default tabs;
+
+const App = createAppContainer(tabs);
+export default App;
+//export default createAppContainer(tabs);

@@ -47,15 +47,15 @@ class CustomTextInput extends Component {
 			</View>
 			);
 	}
-
-	CustomTextInput.propTypes = {
-		label: PropTypes.string.isRequired, 
-		labelStyle: PropTypes.object,
-		maxLength: PropTypes.number, 
-		textInputStyle: PropTypes.object,
-		stateHolder: PropTypes.object.isRequired, 
-		stateFieldName : PropTypes.string.isRequired
-	};
 }
+
+CustomTextInput.propTypes = {
+	label: PropTypes.string.isRequired, 
+	labelStyle: PropTypes.object,
+	maxLength: PropTypes.number, 
+	textInputStyle: PropTypes.object,
+	stateHolder: PropTypes.object.isRequired, 
+	stateFieldName : PropTypes.string.isRequired
+};
 
 export default CustomTextInput;
